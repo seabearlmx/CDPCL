@@ -1,8 +1,7 @@
 ## CDPCL (ACM MM 2023): Official Project Webpage
 This repository provides the official PyTorch implementation of the following paper:
 > **CDPCL:** Calibration-based Dual Prototypical Contrastive Learning Approach for Domain Generalization Semantic Segmentation<br>
-> Muxin Liao*, Shishun Tian*, Yuhang Zhang<br>
-> Guoguang Hua, Wenbin Zou, Xia Li (*: equal contribution)<br>
+> Muxin Liao*, Shishun Tian*, Yuhang Zhang, Guoguang Hua, Wenbin Zou, Xia Li (*: equal contribution)<br>
 > ACM MM 2023, Accepted as Poster<br>
 
 > Paper: [ACM Digital Library](https://dl.acm.org/doi/abs/10.1145/3581783.3611792)<br>
