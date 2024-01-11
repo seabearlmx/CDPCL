@@ -1,49 +1,29 @@
-## RobustNet (CVPR 2021 Oral): Official Project Webpage
+## CDPCL (ACM MM 2023): Official Project Webpage
 This repository provides the official PyTorch implementation of the following paper:
-> **RobustNet:** Improving Domain Generalization in Urban-Scene Segmentationvia Instance Selective Whitening<br>
-> Sungha Choi* (LG AI Research), Sanghun Jung* (KAIST AI), Huiwon Yun (Sogang Univ.)<br>
-> Joanne T. Kim (Korea Univ.), Seungryong Kim (Korea Univ.), Jaegul Choo (KAIST AI) (*: equal contribution)<br>
-> CVPR 2021, Accepted as Oral Presentation<br>
+> **CDPCL:** Calibration-based Dual Prototypical Contrastive Learning Approach for Domain Generalization Semantic Segmentation<br>
+> Muxin Liao*, Shishun Tian*, Yuhang Zhang<br>
+> Guoguang Hua, Wenbin Zou, Xia Li (*: equal contribution)<br>
+> ACM MM 2023, Accepted as Poster<br>
 
-> Paper: [arxiv](https://arxiv.org/abs/2103.15597)<br>
-> Slide: [slideshare](https://www.slideshare.net/SunghaChoi1/cvpr-2021-oral-robustnet-improving-domain-generalization-in-urbanscene-segmentation) <br>
-> Youtube Video (English): [Youtube / 5min](https://youtu.be/3vf7Oh6gYEE) <br>
-> Short Seminar (Korean): [LG AI Day / 12min](https://youtu.be/B-g1A1pIslg), [AIIS Spring Retreat / 7min](https://youtu.be/OAvvsp8KsYM)
+> Paper: [ACM Digital Library](https://dl.acm.org/doi/abs/10.1145/3581783.3611792)<br>
 
 > **Abstract:** 
-*Enhancing the generalization performance of deep neural networks in the real world (i.e., unseen domains) is crucial for safety-critical applications such as autonomous driving.
-To address this issue, this paper proposes a novel instance selective whitening loss to improve the robustness of the segmentation networks for unseen domains.
-Our approach disentangles the domain-specific style and domain-invariant content encoded in higher-order statistics (i.e., feature covariance) of the feature representations and selectively removes only the style information causing domain shift.
-As shown in the below figure, our method provides reasonable predictions for (a) low-illuminated, (b) rainy, and (c) unexpected new scene images.
-These types of images are not included in the training dataset that the baseline shows a significant performance drop, contrary to ours.
-Being simple but effective, our approach improves the robustness of various backbone networks without additional computational cost. 
-We conduct extensive experiments in urban-scene segmentation and show the superiority of our approach over existing work.*<br>
-
-<p align="center">
-  <img src="assets/fig_main.png" />
-</p>
+*Prototypical contrastive learning (PCL) has been widely used to learn class-wise domain-invariant features recently. These methods are based on the assumption that the prototypes, which are represented as the central value of the same class in a certain domain, are domain-invariant. Since the prototypes of different domains have discrepancies as well, the class-wise domain-invariant features learned from the source domain by PCL need to be aligned with the prototypes of other domains simultaneously. However, the prototypes of the same class in different domains may be different while the prototypes of different classes may be similar, which may affect the learning of class-wise domain-invariant features. Based on these observations, a calibration-based dual prototypical contrastive learning (CDPCL) approach is proposed to reduce the domain discrepancy between the learned class-wise features and the prototypes of different domains for domain generalization semantic segmentation. It contains an uncertainty-guided PCL (UPCL) and a hard-weighted PCL (HPCL). Since the domain discrepancies of the prototypes of different classes may be different, we propose an uncertainty probability matrix to represent the domain discrepancies of the prototypes of all the classes. The UPCL estimates the uncertainty probability matrix to calibrate the weights of the prototypes during the PCL. Moreover, considering that the prototypes of different classes may be similar in some circumstances, which means these prototypes are hard-aligned, the HPCL is proposed to generate a hard-weighted matrix to calibrate the weights of the hard-aligned prototypes during the PCL. Extensive experiments demonstrate that our approach achieves superior performance over current approaches on domain generalization segmentation tasks. The source code will be released at https://github.com/seabearlmx/CDPCL.*<br>
 
 ## Code Contributors
-[Sungha Choi](https://www.linkedin.com/in/sungha-choi-1130185a/) (LG AI Research), [Sanghun Jung](https://www.linkedin.com/in/sanghun-jung-b17a4b1b8/) (KAIST AI)
-
-## Concept Video
-Click the figure to watch the youtube video of our paper!
-
-<p align="center">
-  <a href="https://youtu.be/3vf7Oh6gYEE"><img src="assets/robustnet_motivation.png" alt="Youtube Video"></a><br>
-</p>
+[Muxin Liao](https://scholar.google.com/citations?user=RVt9XHEAAAAJ&hl=zh-CN)
 
 ## Pytorch Implementation
 ### Installation
 Clone this repository.
 ```
-git clone https://github.com/shachoi/RobustNet.git
-cd RobustNet
+git clone https://github.com/seabearlmx/CDPCL.git
+cd CDPCL
 ```
 Install following packages.
 ```
-conda create --name robustnet python=3.7
-conda activate robustnet
+conda create --name cdpcl python=3.7
+conda activate cdpcl
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install scipy==1.1.0
 conda install tqdm==4.46.0
@@ -53,8 +33,11 @@ pip install thop
 pip install kmeans1d
 imageio_download_bin freeimage
 ```
-### How to Run RobustNet
-We evaludated RobustNet on [Cityscapes](https://www.cityscapes-dataset.com/), [BDD-100K](https://bair.berkeley.edu/blog/2018/05/30/bdd/),[Synthia](https://synthia-dataset.net/downloads/) ([SYNTHIA-RAND-CITYSCAPES](http://synthia-dataset.net/download/808/)), [GTAV](https://download.visinf.tu-darmstadt.de/data/from_games/) and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas?pKey=2ix3yvnjy9fwqdzwum3t9g&lat=20&lng=0&z=1.5).
+### How to Run CDPCL
+
+The running scripts and experimental settings highly rely on [RobustNet](https://github.com/shachoi/RobustNet).
+
+We evaludated CDPCL on [Cityscapes](https://www.cityscapes-dataset.com/), [BDD-100K](https://bair.berkeley.edu/blog/2018/05/30/bdd/),[Synthia](https://synthia-dataset.net/downloads/) ([SYNTHIA-RAND-CITYSCAPES](http://synthia-dataset.net/download/808/)), [GTAV](https://download.visinf.tu-darmstadt.de/data/from_games/) and [Mapillary Vistas](https://www.mapillary.com/dataset/vistas?pKey=2ix3yvnjy9fwqdzwum3t9g&lat=20&lng=0&z=1.5).
 
 We adopt Class uniform sampling proposed in [this paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Improving_Semantic_Segmentation_via_Video_Propagation_and_Label_Relaxation_CVPR_2019_paper.pdf) to handle class imbalance problems. [GTAVUniform](https://github.com/shachoi/RobustNet/blob/0538c69954c030273b3df952f90347572ecac53b/datasets/gtav.py#L306) and [CityscapesUniform](https://github.com/shachoi/RobustNet/blob/0538c69954c030273b3df952f90347572ecac53b/datasets/cityscapes.py#L324) are the datasets to which Class Uniform Sampling is applied.
 
@@ -97,7 +80,7 @@ mapillary
    └ labels
 ```
 
-#### We used [GTAV_Split](https://download.visinf.tu-darmstadt.de/data/from_games/code/read_mapping.zip) to split GTAV dataset into training/validation/test set. Please refer the txt files in [split_data](https://github.com/shachoi/RobustNet/tree/main/split_data).
+#### We used [GTAV_Split](https://download.visinf.tu-darmstadt.de/data/from_games/code/read_mapping.zip) to split GTAV dataset into training/validation/test set. Please refer the txt files in [split_data](https://github.com/seabearlmx/CDPCL/tree/main/split_data).
 
 ```
 GTAV
@@ -117,7 +100,7 @@ GTAV
      └ folder
 ```
 
-#### We randomly splitted [Synthia dataset](http://synthia-dataset.net/download/808/) into train/val set. Please refer the txt files in [split_data](https://github.com/shachoi/RobustNet/tree/main/split_data).
+#### We randomly splitted [Synthia dataset](http://synthia-dataset.net/download/808/) into train/val set. Please refer the txt files in [split_data](https://github.com/seabearlmx/CDPCL/tree/main/split_data).
 
 ```
 synthia
@@ -133,7 +116,7 @@ synthia
      └ val
 ```
 
-2. You should modify the path in **"<path_to_robustnet>/config.py"** according to your dataset path.
+2. You should modify the path in **"<path_to_CDPCL>/config.py"** according to your dataset path.
 ```
 #Cityscapes Dir Location
 __C.DATASET.CITYSCAPES_DIR = <YOUR_CITYSCAPES_PATH>
@@ -146,45 +129,11 @@ __C.DATASET.BDD_DIR = <YOUR_BDD_PATH>
 #Synthia Dataset Dir Location
 __C.DATASET.SYNTHIA_DIR = <YOUR_SYNTHIA_PATH>
 ```
-3. You can train RobustNet with following commands.
+3. You can train CDPCL with following commands.
 ```
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1,2,3 ./scripts/train_r50os16_gtav_isw.sh # Train: GTAV, Test: BDD100K, Cityscapes, Synthia, Mapillary / ResNet50, Ours (ISW)
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1,2,3 ./scripts/train_r50os16_gtav_ibn.sh # Train: GTAV, Test: BDD100K, Cityscapes, Synthia, Mapillary / ResNet50, IBN-Net
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1,2,3 ./scripts/train_r50os16_gtav_base.sh # Train: GTAV, Test: BDD100K, Cityscapes, Synthia, Mapillary / ResNet50, Baseline (DeepLabV3+)
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1 ./scripts/train_r50os16_cty_isw.sh # Train: Cityscapes, Test: BDD100K, GTAV, Synthia, Mapillary / ResNet50, Ours(ISW)
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1 ./scripts/train_r50os16_cty_ibn.sh # Train: Cityscapes, / ResNet50, IBN-Net
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1 ./scripts/train_r50os16_cty_base.sh # Train: Cityscapes, / ResNet50, Baseline (DeepLabV3+)
+<path_to_CDPCL>$ CUDA_VISIBLE_DEVICES=0,1,2,3 ./scripts/train_r50os16_gtav_isw.sh # Train: GTAV, Test: BDD100K, Cityscapes, Synthia, Mapillary / ResNet50
 ```
-### Pretrained Models
-#### All models trained for our paper
-You can download all models evaluated in our paper at [Google Drive](https://drive.google.com/drive/folders/19i1G-gcJ3BV_VxO0ZG9YMJ4Btyj8c6dM?usp=sharing)
-
-4. You can validate pretrained model with following commands.
-```
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1 ./scripts/valid_mobile_gtav_isw.sh <weight_file_location>
-```
-
-5. You can infer the segmentation results from images through pretrained model using a sliding window or a pooling method.
-```
-<path_to_robustnet>$ CUDA_VISIBLE_DEVICES=0,1 ./scripts/infer_r50os16_cty_isw.sh <weight_file_location> <result_save_location>
-```
-
-#### ImageNet pretrained ResNet-101 which has three 3×3 convolutions in the first layer
-To train ResNet-101 based RobustNetNet, you should download ImageNet pretrained ResNet-101 from [this link](https://drive.google.com/file/d/1jMx3HdVqSlpIYIyG3VPi8q-ZiclOHlc7/view?usp=sharing). Put it into following directory.
-```
-<path_to_robustnet>/pretrained/resnet101-imagenet.pth
-```
-This pretrained model is from [MIT CSAIL Computer Vision Group](http://sceneparsing.csail.mit.edu/)
-
-### Additional experimental results not published in paper
-Training set: GTAV, Model: ResNet-101 OS8<br>
-The averages of the three experimental results for each model are as follows.
-|Model|BDD|Cityscapes|Mapillary|Synthia|GTAV|
-|------|---|---|---|---|---|
-|Baseline|24.85|30.06|31.50|28.78|74.71|
-|IBN|33.30|33.63|36.50|31.32|74.46|
-|ISW|35.37|37.09|38.50|30.49|74.49|
 
 ## Acknowledgments
-Our pytorch implementation is heavily derived from [NVIDIA segmentation](https://github.com/NVIDIA/semantic-segmentation) and [HANet](https://github.com/shachoi/HANet).
+Our pytorch implementation is heavily derived from [RobustNet](https://github.com/shachoi/RobustNet).
 Thanks to the NVIDIA implementations.
